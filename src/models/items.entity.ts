@@ -1,9 +1,16 @@
 import mongoose from "mongoose";
 
+enum SIZE_ENUM {
+  S = "S",
+  M = "M",
+  L = "L",
+  XL = "XL"
+}
+
 interface ItemsSchema {
   id: number,
   name: string,
-  size: Array<any>,
+  sizes: Array<SIZE_ENUM>,
   category: string,
   price: number,
   quantity: number,
@@ -13,7 +20,7 @@ interface ItemsSchema {
 const itemsSchema = new mongoose.Schema<ItemsSchema>({
   id: { type: Number, required: true },
   name: { type: String, required: true },
-  size: { type: [], required: true },
+  sizes: { type: [String], enum: [SIZE_ENUM.S, SIZE_ENUM.M, SIZE_ENUM.L, SIZE_ENUM.XL], required: true },
   category: { type: String, required: true },
   price: { type: Number, required: true },
   quantity: { type: Number, required: true },
