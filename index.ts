@@ -20,7 +20,7 @@ app.listen(PORT, () => {
 
 app.get('/', async (req: Request, res: Response) => {
   try {
-    const response = await Items.find();
+    const response = await Items.find({}, { _id: 0, id: 1, name: 1, sizes: 1, category: 1, price: 1, quantity: 1, imageSrc: 1 });
     return res.status(200).send({
       data: response
     })
@@ -43,7 +43,7 @@ app.post('/', async (req: Request, res: Response) => {
   } catch (error) {
     ErrorLog(error);
     return res.status(400).send({
-      message: 'Something went wrong'
+      message: `Something went wrong.${error}`
     })
   }
 })
