@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import cors from 'cors';
 import dotenv from 'dotenv';
 import connectWithDB from "./src/configs/mongo.config";
 import Items from "./src/models/items.entity";
@@ -9,6 +10,7 @@ const PORT = process.env.PORT;
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 connectWithDB();
 
