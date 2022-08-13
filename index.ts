@@ -1,5 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './public/swagger.json';
 import dotenv from 'dotenv';
 import connectWithDB from "./src/configs/mongo.config";
 import Items from "./src/models/items.entity";
@@ -47,3 +49,5 @@ app.post('/', async (req: Request, res: Response) => {
     })
   }
 })
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

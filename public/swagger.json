@@ -1,0 +1,105 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "api-ecommerce",
+		"version": "0.0.1",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/": {
+			"get": {
+				"operationId": "GetItem",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateItem",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"id": {
+										"type": "number",
+										"format": "double"
+									},
+									"name": {
+										"type": "string"
+									},
+									"sizes": {
+										"items": {},
+										"type": "array"
+									},
+									"category": {
+										"type": "string"
+									},
+									"price": {
+										"type": "number",
+										"format": "double"
+									},
+									"quantity": {
+										"type": "number",
+										"format": "double"
+									},
+									"imageSrc": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"id",
+									"name",
+									"sizes",
+									"category",
+									"price",
+									"quantity",
+									"imageSrc"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}
