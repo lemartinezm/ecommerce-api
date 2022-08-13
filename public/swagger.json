@@ -5,7 +5,73 @@
 		"parameters": {},
 		"requestBodies": {},
 		"responses": {},
-		"schemas": {},
+		"schemas": {
+			"SIZE_ENUM": {
+				"enum": [
+					"S",
+					"M",
+					"L",
+					"XL"
+				],
+				"type": "string"
+			},
+			"ItemsSchema": {
+				"properties": {
+					"id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"sizes": {
+						"items": {
+							"$ref": "#/components/schemas/SIZE_ENUM"
+						},
+						"type": "array"
+					},
+					"category": {
+						"type": "string"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"quantity": {
+						"type": "number",
+						"format": "double"
+					},
+					"imageSrc": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"id",
+					"name",
+					"sizes",
+					"category",
+					"price",
+					"quantity",
+					"imageSrc"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"ItemsResponse": {
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/ItemsSchema"
+						},
+						"type": "array"
+					}
+				},
+				"type": "object"
+			}
+		},
 		"securitySchemes": {}
 	},
 	"info": {
@@ -18,34 +84,130 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/": {
+		"/api": {
 			"get": {
 				"operationId": "GetItem",
 				"responses": {
 					"200": {
-						"description": "Ok",
+						"description": "Items obtained successfully",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"data": [
+												{
+													"id": 1,
+													"name": "Hoodie Anime",
+													"sizes": [
+														"S",
+														"M",
+														"L",
+														"XL"
+													],
+													"category": "Sudaderas",
+													"price": 180,
+													"quantity": 1,
+													"imageSrc": "https://res.cloudinary.com/daobmfotr/image/upload/v1660249137/e-commerce-x/hoddie_anime_swzi9p.webp"
+												},
+												{
+													"id": 2,
+													"name": "Sudadera Nike",
+													"sizes": [
+														"S",
+														"M",
+														"L",
+														"XL"
+													],
+													"category": "Sudaderas",
+													"price": 100,
+													"quantity": 1,
+													"imageSrc": "https://res.cloudinary.com/daobmfotr/image/upload/v1660249137/e-commerce-x/hoddie_anime_swzi9p.webp"
+												}
+											]
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Something went wrong",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ItemsResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Something went wrong"
+										}
+									}
+								}
 							}
 						}
 					}
 				},
+				"description": "Endpoint to obtain all items",
+				"tags": [
+					"Items Controller"
+				],
 				"security": [],
 				"parameters": []
 			},
 			"post": {
 				"operationId": "CreateItem",
 				"responses": {
-					"200": {
-						"description": "Ok",
+					"201": {
+						"description": "Item created successfully",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"id": 1,
+											"name": "Hoodie Anime",
+											"sizes": [
+												"S",
+												"M",
+												"L",
+												"XL"
+											],
+											"category": "Sudaderas",
+											"price": 180,
+											"quantity": 1,
+											"imageSrc": "https://res.cloudinary.com/daobmfotr/image/upload/v1660249137/e-commerce-x/hoddie_anime_swzi9p.webp"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Something went wrong",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/ItemsResponse"
+								},
+								"examples": {
+									"Example 1": {
+										"value": {
+											"message": "Something went wrong"
+										}
+									}
+								}
 							}
 						}
 					}
 				},
+				"description": "Endpoint to create item",
+				"tags": [
+					"Items Controller"
+				],
 				"security": [],
 				"parameters": [],
 				"requestBody": {
@@ -56,28 +218,35 @@
 								"properties": {
 									"id": {
 										"type": "number",
-										"format": "double"
+										"format": "double",
+										"description": "Item ID"
 									},
 									"name": {
-										"type": "string"
+										"type": "string",
+										"description": "Name"
 									},
 									"sizes": {
 										"items": {},
-										"type": "array"
+										"type": "array",
+										"description": "Sizes available"
 									},
 									"category": {
-										"type": "string"
+										"type": "string",
+										"description": "Category"
 									},
 									"price": {
 										"type": "number",
-										"format": "double"
+										"format": "double",
+										"description": "Price"
 									},
 									"quantity": {
 										"type": "number",
-										"format": "double"
+										"format": "double",
+										"description": "Quantity"
 									},
 									"imageSrc": {
-										"type": "string"
+										"type": "string",
+										"description": "Image source URL"
 									}
 								},
 								"required": [

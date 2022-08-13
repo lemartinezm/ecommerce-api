@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
-enum SIZE_ENUM {
+export enum SIZE_ENUM {
   S = "S",
   M = "M",
   L = "L",
   XL = "XL"
 }
 
-interface ItemsSchema {
+export interface ItemsSchema {
   id: number,
   name: string,
   sizes: Array<SIZE_ENUM>,
